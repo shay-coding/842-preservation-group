@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOE35 Storage Gallery - 842 Preservation Group</title>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --header-bg: #000435;
+    --main-bg: #f8f8f8;
+    --main-text: #1e293b;
+    --accent-color: #ffcc00;
+    --card-bg: #eaeaea;
+  }
+
+  [data-theme="dark"] {
+    --main-bg: #1e293b;
+    --main-text: #f8f8f8;
+    --card-bg: #2a3a50;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background-color: var(--main-bg);
+    color: var(--main-text);
+    transition: all 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+  }
+
+  header {
+    background-color: var(--header-bg);
+    color: #f8f8f8;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+
+  .mobile-logo {
+    display: block;
+    width: 200px;
+    margin: 0 auto 15px;
+  }
+
+  .mobile-heading {
+    display: block;
+    font-size: 2.5rem;
+    margin: 0 auto 15px;
+  }
+
+  .desktop-logo {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .desktop-logo h1 {
+    margin: 0 10px;
+    font-size: 2.5rem;
+  }
+
+  .header-logo {
+    width: 80px;
+    max-width: 20%;
+  }
+
+  nav.socials {
+    margin-top: 10px;
+  }
+
+  nav.socials a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+
+  .toggle-theme {
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 10px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .intro-text {
+    line-height: 1.6;
+    margin: 20px 0 40px;
+    text-align: center;
+  }
+
+  /* Gallery Styles */
+  .gallery-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .gallery-main {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #000;
+  }
+
+  .gallery-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-image.active {
+    display: block;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.02);
+  }
+
+  .gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+  }
+
+  .gallery-nav:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .gallery-nav.prev {
+    left: 10px;
+  }
+
+  .gallery-nav.next {
+    right: 10px;
+  }
+
+  .gallery-counter {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .gallery-controls {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .control-btn {
+    background-color: var(--accent-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .control-btn:hover {
+    opacity: 0.8;
+  }
+
+  /* Thumbnail Strip */
+  .thumbnail-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+
+  .thumbnail {
+    min-width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border: 3px solid transparent;
+  }
+
+  .thumbnail:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  .thumbnail.active {
+    opacity: 1;
+    border-color: var(--accent-color);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  .lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 1001;
+  }
+
+  .lightbox-close:hover {
+    color: var(--accent-color);
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--header-bg);
+    color: #f8f8f8;
+    margin-top: 50px;
+  }
+
+  @media(min-width: 768px) {
+    .mobile-logo,
+    .mobile-heading {
+      display: none;
+    }
+    .desktop-logo {
+      display: flex;
+    }
+  }
+
+  @media(max-width: 600px) {
+    .gallery-main {
+      height: 300px;
+    }
+    
+    .gallery-nav {
+      font-size: 1.5rem;
+      padding: 10px 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="1000027058-removebg-preview.png" alt="842 Preservation Group Combined" class="mobile-logo">
+  <h1 class="mobile-heading">842 Preservation Group</h1>
+
+  <div class="desktop-logo">
+    <img src="image-17.png" alt="34842 Drawing" class="header-logo left-logo">
+    <h1>842 Preservation Group</h1>
+    <img src="sketch-1755446376116.png" alt="DOE35 Drawing" class="header-logo right-logo">
+  </div>
+
+  <nav class="socials">
+    <a href="https://www.facebook.com/profile.php?id=61576943116575" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/842_preservation_group?igsh=ZGtlZm5pNzJvZzNp" target="_blank">Instagram</a>
+    <a href="https://discord.gg/VAtJ7rzXgC" target="_blank">Discord</a>
+    <a href="https://www.flickr.com/photos/201256426@N04/albums/72177720328422777" target="_blank">Flickr</a>
+    <a href="https://ko-fi.com/the842preservationgroup">Support Us</a>
+  </nav>
+
+  <button class="toggle-theme" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+  <a href="index.html" class="back-link">← Back to Home</a>
+</header>
+
+<main>
+  <section>
+    <h2>DOE35 – Storage Gallery</h2>
+    <p class="intro-text">
+      We have now been given permission to share photographs of DOE35 when she was in storage on the Isle of Wight.
+      Photographs courtesy of our Website Manager, Shay.
+    </p>
+
+    <div class="gallery-container">
+      <div class="gallery-main">
+        <button class="gallery-nav prev" onclick="changeImage(-1)">‹</button>
+        <img src="DOE35-Photos/DOE35_1.jpg" alt="DOE35 in Storage 1" class="gallery-image active">
+        <img src="DOE35-Photos/DOE35_2.jpg" alt="DOE35 in Storage 2" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_3.jpg" alt="DOE35 in Storage 3" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_4.jpg" alt="DOE35 in Storage 4" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_5.jpg" alt="DOE35 in Storage 5" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_6.jpg" alt="DOE35 in Storage 6" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_7.jpg" alt="DOE35 in Storage 7" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_8.jpg" alt="DOE35 in Storage 8" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_9.jpg" alt="DOE35 in Storage 9" class="gallery-image">
+        <img src="DOE35-Photos/DOE35_10.jpg" alt="DOE35 in Storage 10" class="gallery-image">
+        <button class="gallery-nav next" onclick="changeImage(1)">›</button>
+      </div>
+
+      <div class="gallery-counter">
+        <span id="current-image">1</span> / <span id="total-images">10</span>
+      </div>
+
+      <div class="gallery-controls">
+        <button class="control-btn" onclick="toggleAutoplay()" id="autoplay-btn">⏸ Pause</button>
+      </div>
+
+      <div class="thumbnail-strip">
+        <img src="DOE35-Photos/DOE35_1.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="goToImage(0)">
+        <img src="DOE35-Photos/DOE35_2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="goToImage(1)">
+        <img src="DOE35-Photos/DOE35_3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="goToImage(2)">
+        <img src="DOE35-Photos/DOE35_4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="goToImage(3)">
+        <img src="DOE35-Photos/DOE35_1.jpg" alt="Thumbnail 5" class="thumbnail" onclick="goToImage(4)">
+        <img src="DOE35-Photos/DOE35_6.jpg" alt="Thumbnail 6" class="thumbnail" onclick="goToImage(5)">
+        <img src="DOE35-Photos/DOE35_7.jpg" alt="Thumbnail 7" class="thumbnail" onclick="goToImage(6)">
+        <img src="DOE35-Photos/DOE35_8.jpg" alt="Thumbnail 8" class="thumbnail" onclick="goToImage(7)">
+        <img src="DOE35-Photos/DOE35_9.jpg" alt="Thumbnail 9" class="thumbnail" onclick="goToImage(8)">
+        <img src="DOE35-Photos/DOE35_9.jpg" alt="Thumbnail 10" class="thumbnail" onclick="goToImage(9)">
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">×</button>
+  <img src="" alt="Enlarged view" class="lightbox-image" id="lightbox-img">
+</div>
+
+<footer>
+  &copy; 2026 842 Preservation Group
+</footer>
+
+<script>
+  // Theme toggle
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
+
+  // Gallery functionality
+  let currentIndex = 0;
+  const images = document.querySelectorAll('.gallery-image');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const totalImages = images.length;
+  let autoplayInterval;
+  let isAutoplayActive = true;
+
+  document.getElementById('total-images').textContent = totalImages;
+
+  function showImage(index) {
+    images.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+    thumbnails.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === index);
+    });
+    document.getElementById('current-image').textContent = index + 1;
+    currentIndex = index;
+  }
+
+  function changeImage(direction) {
+    let newIndex = currentIndex + direction;
+    if (newIndex < 0) newIndex = totalImages - 1;
+    if (newIndex >= totalImages) newIndex = 0;
+    showImage(newIndex);
+  }
+
+  function goToImage(index) {
+    showImage(index);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      changeImage(1);
+    }, 4000);
+    isAutoplayActive = true;
+    document.getElementById('autoplay-btn').innerHTML = '⏸ Pause';
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+    isAutoplayActive = false;
+    document.getElementById('autoplay-btn').innerHTML = '▶ Play';
+  }
+
+  function toggleAutoplay() {
+    if (isAutoplayActive) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  }
+
+  // Click to enlarge
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      document.getElementById('lightbox').classList.add('active');
+      document.getElementById('lightbox-img').src = img.src;
+      stopAutoplay();
+    });
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    if (isAutoplayActive === false) {
+      // Don't restart autoplay if user paused it
+    } else {
+      startAutoplay();
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Start autoplay on load
+  startAutoplay();
+</script>
+
+</body>
+</html>

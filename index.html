@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>842 Preservation Group</title>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --header-bg: #000435;
+    --main-bg: #f8f8f8;
+    --main-text: #1e293b;
+    --accent-color: #ffcc00;
+    --card-bg: #eaeaea;
+  }
+
+  [data-theme="dark"] {
+    --main-bg: #1e293b;
+    --main-text: #f8f8f8;
+    --card-bg: #2a3a50;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background-color: var(--main-bg);
+    color: var(--main-text);
+    transition: all 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+  }
+
+  header {
+    background-color: var(--header-bg);
+    color: #f8f8f8;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+
+  .mobile-logo {
+    display: block;
+    width: 200px;
+    margin: 0 auto 15px;
+  }
+
+  .mobile-heading {
+    display: block;
+    font-size: 2.5rem;
+    margin: 0 auto 15px;
+  }
+
+  .desktop-logo {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .desktop-logo h1 {
+    margin: 0 10px;
+    font-size: 2.5rem;
+  }
+
+  .header-logo {
+    width: 80px;
+    max-width: 20%;
+  }
+
+  nav.socials {
+    margin-top: 10px;
+  }
+
+  nav.socials a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+
+  .toggle-theme {
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 10px;
+  }
+
+  main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .about p {
+    line-height: 1.6;
+  }
+
+  .buses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .bus-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    color: var(--main-text);
+    text-decoration: none;
+  }
+
+  .bus-card:hover {
+    transform: scale(1.05);
+  }
+
+  .bus-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+  }
+
+  .bus-card p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  /* Meet the Team Section */
+  .meet-team {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .meet-team a {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .meet-team a:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--header-bg);
+    color: #f8f8f8;
+    margin-top: 50px;
+  }
+
+  @media(min-width: 768px) {
+    .mobile-logo,
+    .mobile-heading {
+      display: none;
+    }
+    .desktop-logo {
+      display: flex;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="1000027058-removebg-preview.png" alt="842 Preservation Group Combined" class="mobile-logo">
+  <h1 class="mobile-heading">842 Preservation Group</h1>
+
+  <div class="desktop-logo">
+    <img src="image-17.png" alt="34842 Drawing" class="header-logo left-logo">
+    <h1>842 Preservation Group</h1>
+    <img src="sketch-1755446376116.png" alt="DOE35 Drawing" class="header-logo right-logo">
+  </div>
+
+  <nav class="socials">
+    <a href="https://www.facebook.com/profile.php?id=61576943116575" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/842_preservation_group?igsh=ZGtlZm5pNzJvZzNp" target="_blank">Instagram</a>
+    <a href="https://discord.gg/VAtJ7rzXgC" target="_blank">Discord</a>
+    <a href="https://www.flickr.com/photos/201256426@N04/albums/72177720328422777" target="_blank">Flickr</a>
+    <a href="https://ko-fi.com/the842preservationgroup">Support Us</a>
+  </nav>
+
+  <button class="toggle-theme" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+</header>
+
+<main>
+  <section class="about">
+    <h2>About Us</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+    </p>
+  </section>
+
+  <section class="preserved-buses">
+    <h2>Buses in Preservation</h2>
+    <div class="buses">
+      <a class="bus-card" href="34842.html">
+        <h3>34842 (VU06 JBE)</h3>
+        <p>Dennis Dart SLF Plaxton Pointer 2</p>
+      </a>
+      <a class="bus-card" href="18312.html">
+        <h3>18312 (KX05 TWK)</h3>
+        <p>Dennis Trident Alexander ALX400</p>
+      </a>
+      <a class="bus-card" href="DOE35.html">
+        <h3>DOE35 (LX58 CYE)</h3>
+        <p>Dennis Trident Optare Olympus</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="planned-buses">
+    <h2>Buses We Plan to Preserve</h2>
+    <div class="buses">
+      <a class="bus-card" href="373.html">
+        <h3>373 (YN55 NHG)</h3>
+        <p>Scania N94UD OmniDekka</p>
+      </a>
+     <a class="bus-card" href="1648.html">
+        <h3>1648 (HF66 CFY)</h3>
+        <p>Alexander Dennis Enviro400 MMC</p>
+      </a>
+     <a class="bus-card" href="solo.html">
+        <h3>T415 OUB</h3>
+        <p>Mercedes-Benz Optare Solo</p>
+      </a>
+      <a class="bus-card" href="lolyne.html">
+        <h3>East Lancs Myllenium Lolyne</h3>
+        <p>Details to be added soon</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="news">
+    <h2>News</h2>
+    <div class="buses"></div>
+    <div class="buses">
+  <a class="bus-card" href="doe35-storage.html">
+    <h3>DOE35 – Storage Gallery</h3>
+    <p>Photos of DOE35 during its time in storage before preservation</p>
+  </a>
+</div>
+  </section>
+
+  <section class="meet-team">
+    <h2>Meet the Team</h2>
+    <p>Want to know more about the people behind 842 Preservation Group? <a href="team.html">Meet our team here.</a></p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 842 Preservation Group
+</footer>
+
+<script>
+  // Default to dark mode if nothing saved
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
+</script>
+
+</body>
+</html>
